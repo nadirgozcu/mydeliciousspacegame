@@ -23,7 +23,7 @@ public class StarManager : MonoBehaviour
 
     IEnumerator InstantiateStarsOverTime()
     {
-        for (int i = 0; i < starRoot.transform.GetChildCount(); i++)
+        for (int i = 0; i < starRoot.transform.childCount; i++)
         {
             if (!PlayerCharacter.instance)
                 break;
