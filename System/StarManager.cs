@@ -12,16 +12,13 @@ public class StarManager : MonoBehaviour
     float radius;
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "star")
-        {
-            Vector2 tar = tr.position;
-            Vector3 str = other.transform.position;
-            Vector2 dir = (Vector2) str - tar;
-            dir = dir * -1;
-            Vector2 newPos = tar + dir;
-            other.transform.position = new Vector3(newPos.x, newPos.y, str.z);
-            //starCache.Add(other.transform);
-        }
+        Vector2 tar = tr.position;
+        Vector3 str = other.transform.position;
+        Vector2 dir = (Vector2)str - tar;
+        dir = dir * -1;
+        Vector2 newPos = tar + dir;
+        other.transform.position = new Vector3(newPos.x, newPos.y, str.z);
+        //starCache.Add(other.transform);
     }
 
     void SpawnStar()
