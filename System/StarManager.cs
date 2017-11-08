@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class StarManager : MonoBehaviour
 {
     public static StarManager instance;
-    List<Transform> starCache = new List<Transform>();
     public GameObject starObj;
     public GameObject starRoot;
     public int starCount = 500;
