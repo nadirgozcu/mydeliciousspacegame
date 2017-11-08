@@ -15,6 +15,13 @@ public abstract class StaticCharacter : MonoBehaviour
     public Animator animator;
     public bool isAlive = true;
     public int temp;
+    public enum INSTYPE
+    {
+        Tube,
+        Tower,
+        Center
+    }
+    public INSTYPE instanceType;
 #if UNITY_EDITOR
     public Texture2D spriteRoot;
     public bool west = false, east = false, south = false, north = false;
@@ -26,13 +33,6 @@ public abstract class StaticCharacter : MonoBehaviour
         EAST,
         WEST
     }
-    public enum INSTYPE
-    {
-        Tube,
-        Tower,
-        Center
-    }
-    public INSTYPE instanceType;
     public DIRECTION parentDir;
     public void UpdateSprite()
     {
