@@ -120,7 +120,7 @@ public class PlayerCharacter : UnitComponent, AttackingUnitI, AttackedUnitI
 
     void Update()
     {
-        if (hpLose > 0)
+        if (isAlive && hpLose > 0)
         {
             hpLose -= Time.deltaTime/12f;
             GameManager.instance.healthText.text = (int)(100 - hpLose * 100 / hp) + "";
