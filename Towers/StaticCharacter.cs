@@ -198,10 +198,37 @@ public abstract class StaticCharacter : MonoBehaviour
                 sr.sprite = sprites[21];
         }
         else sr.sprite = sprites[22];
-        DestroyImmediate(gameObject.GetComponent<Collider2D>(), true);
-        PolygonCollider2D temp = gameObject.AddComponent<PolygonCollider2D>();
-        temp.isTrigger = true;
-        UnityEditorInternal.ComponentUtility.MoveComponentUp(temp);
+
+        DamageDealer dd = gameObject.GetComponentInChildren<DamageDealer>();
+        DamageTaker dt = gameObject.GetComponentInChildren<DamageTaker>();
+        DestroyImmediate(gameObject.GetComponent<Collider2D>());
+        if(dd)
+            DestroyImmediate(dd.GetComponent<Collider2D>());
+        if(dt)
+            DestroyImmediate(dt.GetComponent<Collider2D>());
+
+        PolygonCollider2D root = gameObject.AddComponent<PolygonCollider2D>();
+        if (dd)
+        {
+            PolygonCollider2D ddCollider = dd.gameObject.AddComponent<PolygonCollider2D>();
+            ddCollider.pathCount = root.pathCount;
+            for (int p = 0; p < root.pathCount; p++)
+            {
+                ddCollider.SetPath(p, root.GetPath(p));
+            }
+            ddCollider.isTrigger = true;
+        }
+        if (dt)
+        {
+            PolygonCollider2D dtCollider = dt.gameObject.AddComponent<PolygonCollider2D>();
+            dtCollider.pathCount = root.pathCount;
+            for (int p = 0; p < root.pathCount; p++)
+            {
+                dtCollider.SetPath(p, root.GetPath(p));
+            }
+            dtCollider.isTrigger = true;
+        }
+        DestroyImmediate(root);
     }
     public int listIndex = 0;
 #endif
