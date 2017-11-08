@@ -8,7 +8,6 @@ public class CenterStaticCharacter : StaticCharacter, AttackedUnitI
     public override void OnDie()
     {
         base.OnDie();
-        LevelManager.instance.NextLevel();
     }
 
     public override void OnInit()

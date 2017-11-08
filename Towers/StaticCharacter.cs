@@ -253,6 +253,12 @@ public abstract class StaticCharacter : MonoBehaviour
         for (int i = 0; i < childrenCharacters.Count; i++)
             childrenCharacters[i].OnDie();
         yield return new WaitForSeconds(0.35f);
+        if(instanceType == INSTYPE.Center)
+        {
+            yield return new WaitForSeconds(0.5f);
+            LevelManager.instance.NextLevel();
+        }
+
         GameObject.Destroy(gameObject);
 
 
