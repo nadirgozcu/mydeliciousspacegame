@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+
 public class GameManager: MonoBehaviour {
     public static GameManager instance;
+    public Image damageEffect;
+    public TextMesh healthText;
     public Dictionary<string, int> layers = new Dictionary<string, int>();
     void Start()
     {

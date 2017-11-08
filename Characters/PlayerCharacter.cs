@@ -5,8 +5,6 @@ using UnityEngine.UI;
 public class PlayerCharacter : UnitComponent, AttackingUnitI, AttackedUnitI
 {
     public static PlayerCharacter instance;
-    public Image damageEffect;
-    public TextMesh hpText;
     AudioSource aSource;
     Animator animator;
     public float hpLose = 0;
@@ -131,13 +129,13 @@ public class PlayerCharacter : UnitComponent, AttackingUnitI, AttackedUnitI
         if (hpLose > 0)
         {
             hpLose -= Time.deltaTime/12f;
-            hpText.text = (int)(100 - hpLose * 100 / hp) + "";
-            damageEffect.color = new Color(1, 1, 1, hpLose / hp);
+            GameManager.instance.healthText.text = (int)(100 - hpLose * 100 / hp) + "";
+            GameManager.instance.damageEffect.color = new Color(1, 1, 1, hpLose / hp);
         }
-        Vector3 textPosition = hpText.transform.position;
+        Vector3 textPosition = GameManager.instance.healthText.transform.position;
         textPosition.x = tr.position.x + 0.15f;
         textPosition.y = tr.position.y + 0.15f;
-        hpText.transform.position = textPosition;
+        GameManager.instance.healthText.transform.position = textPosition;
 
         base.OnUpdate();
         UpdateAttacker();
