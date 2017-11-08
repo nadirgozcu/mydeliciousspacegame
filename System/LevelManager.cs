@@ -52,6 +52,7 @@ public class LevelManager : MonoBehaviour {
         tempColor.a = 0;
         GameManager.instance.damageEffect.color = tempColor;
         player.transform.SetParent(activeLevel.transform);
+        GameManager.instance.healthText.text = "100";
 
         CameraManager.instance.SetTarget(player.transform);
 
