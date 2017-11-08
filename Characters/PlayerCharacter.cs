@@ -100,6 +100,8 @@ public class PlayerCharacter : UnitComponent, AttackingUnitI, AttackedUnitI
         isAlive = false;
         isMoveble = false;
         SetVelocity(Vector2.zero);
+        GameManager.instance.healthText.text = "0";
+        GameManager.instance.damageEffect.color = new Color(1, 1, 1, 1);
         StartCoroutine(OnDieAnimation());
     }
 
