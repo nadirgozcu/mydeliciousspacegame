@@ -9,7 +9,6 @@ public class LevelManager : MonoBehaviour {
     public List<GameObject> levels = new List<GameObject>();
     public List<Transform> activeCenters = new List<Transform>();
     public Dictionary<GameObject, List<Missile>> missiles = new Dictionary<GameObject, List<Missile>>();
-    // Use this for initialization
     int levelNum = 0;
     public void loadLevel(int num)
     {
@@ -41,17 +40,16 @@ public class LevelManager : MonoBehaviour {
             
         }
     }
-    public void nextLevel()
+
+    public void NextLevel()
     {
         levelNum++;
-        loadLevel(levelNum);
-
-
-
+        LoadLevel(levelNum);
     }
-    public void resetLevel()
+
+    public void ResetLevel()
     {
-        loadLevel(levelNum);
+        LoadLevel(levelNum);
     }
 
     public void InitMissile(GameObject owner, Missile missile)
@@ -66,12 +64,6 @@ public class LevelManager : MonoBehaviour {
 
     public void Init () {
         instance = this;
-        loadLevel(levelNum);
-
+        LoadLevel(levelNum);
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

@@ -91,7 +91,7 @@ public class PlayerCharacter : UnitComponent, AttackingUnitI, AttackedUnitI
         
         yield return new WaitForSeconds(1f);
 
-        LevelManager.instance.resetLevel();
+        LevelManager.instance.ResetLevel();
         animator.Play("Start", 0);
         isMoveble = true;
         hpLose = 0;

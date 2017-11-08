@@ -8,9 +8,7 @@ public class CenterStaticCharacter : StaticCharacter, AttackedUnitI
     public override void OnDie()
     {
         base.OnDie();
-        /*LevelManager.instance.activeCenters.Remove(tr);
-        if (LevelManager.instance.activeCenters.Count <= 0)
-            LevelManager.instance.nextLevel();*/
+        LevelManager.instance.NextLevel();
     }
 
     public override void OnInit()

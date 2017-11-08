@@ -13,50 +13,49 @@ public class CameraManager : MonoBehaviour
     private float currentDistance = 0;
     private float maxDistance = 1.2f;
     private UnitComponent uComp;
-    public CameraManager setTarget(Transform target)
+    public CameraManager SetTarget(Transform target)
     {
         followTo = target;
         uComp = followTo.GetComponent<UnitComponent>();
         return this;
     }
-    public CameraManager setPosition(Vector3 pos)
+    public CameraManager SetPosition(Vector3 pos)
     {
         cameraTransform.position = pos;
         return this;
     }
-    public CameraManager setFollowState(bool inFollow, bool tp)
+    public CameraManager SetFollowState(bool inFollow, bool tp)
     {
         this.inFollow = inFollow;
         tpToTarget = tp;
         return this;
     }
 
-    public CameraManager setFollowMaxDistance(float distance)
+    public CameraManager SetFollowMaxDistance(float distance)
     {
         this.maxDistance = distance;
         return this;
     }
 
-    public Transform getTransform()
+    public Transform GetTransform()
     {
         return cameraTransform;
     }
-    public Vector2 getPosition()
+    public Vector2 GetPosition()
     {
         return cameraTransform.position;
     }
-    public bool isFollow()
+    public bool IsInFollow()
     {
         return inFollow;
     }
-    public Transform getTarget()
+    public Transform GetTarget()
     {
         return followTo;
     }
     public void Init()
     {
         instance = this;
-        //followTo = GameObject.Find ("mainChar").transform;
         cameraTransform = transform;
         setTarget(PlayerCharacter.instance.tr);
     }
