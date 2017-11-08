@@ -17,6 +17,8 @@ public class GameManager: MonoBehaviour {
         layers.Add("PlayerMissile", 11);
         layers.Add("EnemyMissile", 12);
         layers.Add("NatureMissile", 13);
+        GetComponent<LevelManager>().Init();
+        GameObject.FindObjectOfType<CameraManager>().Init();
     }
     
 }

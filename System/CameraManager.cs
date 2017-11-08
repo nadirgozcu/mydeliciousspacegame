@@ -54,12 +54,12 @@ public class CameraManager : MonoBehaviour
     {
         return followTo;
     }
-    void Start()
+    public void Init()
     {
         instance = this;
         //followTo = GameObject.Find ("mainChar").transform;
         cameraTransform = transform;
-        setTarget(GameObject.Find("Player").transform);
+        setTarget(PlayerCharacter.instance.tr);
     }
     void Update()
     {

@@ -119,11 +119,6 @@ public class PlayerCharacter : UnitComponent, AttackingUnitI, AttackedUnitI
 
     }
 
-    void Awake()
-    {
-        OnStart();
-    }
-
     void Update()
     {
         if (hpLose > 0)

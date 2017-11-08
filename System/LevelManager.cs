@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class LevelManager : MonoBehaviour {
 
     public static LevelManager instance;
+    public static GameObject activeLevel;
+    public GameObject mainCharacter;
     public List<GameObject> levels = new List<GameObject>();
     public List<Transform> activeCenters = new List<Transform>();
     public Dictionary<GameObject, List<Missile>> missiles = new Dictionary<GameObject, List<Missile>>();
@@ -11,16 +13,19 @@ public class LevelManager : MonoBehaviour {
     int levelNum = 0;
     public void loadLevel(int num)
     {
-        Color tempColor = PlayerCharacter.instance.damageEffect.color;
-        tempColor.a = 0;
-        PlayerCharacter.instance.damageEffect.color = tempColor;
-        //GameObject.FindGameObjectWithTag("Level").DestroySelf();
-        /*foreach(GameObject o in GameObject.FindGameObjectsWithTag("Missile")){
-            Destroy(o);
-        }*/
-        PlayerCharacter.instance.tr.position = new Vector3(0, 0, 0);
+        if (activeLevel != null)
+            DestroyObject(activeLevel);
         if (levelNum < levels.Count)
-            GameObject.Instantiate(levels[num]);
+            activeLevel = GameObject.Instantiate(levels[num]);
+
+        GameObject player = GameObject.Instantiate(mainCharacter);
+        player.GetComponent<UnitComponent>().OnStart();
+        PlayerCharacter.instance.tr.position = new Vector3(0, 0, 0);
+        Color tempColor = GameManager.instance.damageEffect.color;
+        tempColor.a = 0;
+        GameManager.instance.damageEffect.color = tempColor;
+        player.transform.SetParent(activeLevel.transform);
+
         var attackers = GameObject.FindObjectsOfType<GameObject>();
         for (int i = 0; i < attackers.Length; i++)
         {
@@ -30,7 +35,7 @@ public class LevelManager : MonoBehaviour {
             {
                 Missile missile = GameObject.Instantiate(attacker.Missile).GetComponent<Missile>();
                 missile.OnInit();
-                missile.tr.SetParent(transform);
+                missile.tr.SetParent(activeLevel.transform);
                 InitMissile(attackers[i], missile.GetComponent<Missile>());
             }
             
@@ -61,7 +66,7 @@ public class LevelManager : MonoBehaviour {
         missiles[owner].Add(missile);
     }
 
-    void Awake () {
+    public void Init () {
         instance = this;
         loadLevel(levelNum);
 
