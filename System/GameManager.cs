@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager: MonoBehaviour {
     public static GameManager instance;
+    public StarManager starManager;
     public Image damageEffect;
     public TextMesh healthText;
     public Dictionary<string, int> layers = new Dictionary<string, int>();
@@ -17,8 +18,9 @@ public class GameManager: MonoBehaviour {
         layers.Add("PlayerMissile", 11);
         layers.Add("EnemyMissile", 12);
         layers.Add("NatureMissile", 13);
-        GetComponent<LevelManager>().Init();
         GameObject.FindObjectOfType<CameraManager>().Init();
+        GetComponent<LevelManager>().Init();
+        starManager.Init();
     }
-    
+
 }
