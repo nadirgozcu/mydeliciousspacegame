@@ -10,6 +10,7 @@ public class StarManager : MonoBehaviour
     public int starCount = 500;
     Transform tr;
     float radius;
+
     void OnTriggerExit2D(Collider2D other)
     {
         Vector2 tar = tr.position;
@@ -18,16 +19,6 @@ public class StarManager : MonoBehaviour
         dir = dir * -1;
         Vector2 newPos = tar + dir;
         other.transform.position = new Vector3(newPos.x, newPos.y, str.z);
-        //starCache.Add(other.transform);
-    }
-
-    void SpawnStar()
-    {
-        if (starCache.Count == 0)
-            return;
-        Transform target = starCache[0];
-        starCache.RemoveAt(0);
-
     }
     
     void Start()
