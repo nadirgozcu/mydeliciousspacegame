@@ -10,10 +10,38 @@ public class LevelManager : MonoBehaviour {
     public List<Transform> activeCenters = new List<Transform>();
     public Dictionary<GameObject, List<Missile>> missiles = new Dictionary<GameObject, List<Missile>>();
     int levelNum = 0;
-    public void loadLevel(int num)
+
+    IEnumerator InstantiateMissilesOverTime()
     {
+        var attackers = GameObject.FindObjectsOfType<GameObject>();
+        for (int i = 0; i < attackers.Length; i++)
+        {
+            if (attackers[i] == null)
+                continue;
+            AttackingUnitI attacker = attackers[i].GetComponent<AttackingUnitI>();
+            if (attacker == null)
+                continue;
+            for (int j = 0; j < 30; j++)
+            {
+                if(!activeLevel == null)
+                    break;
+                Missile missile = GameObject.Instantiate(attacker.Missile).GetComponent<Missile>();
+                missile.OnInit();
+                missile.tr.SetParent(activeLevel.transform);
+                InitMissile(attackers[i], missile.GetComponent<Missile>());
+                yield return new WaitForEndOfFrame();
+            }
+        }
+    }
+
+    public void LoadLevel(int num)
+    {
+        bool newLevel = false;
         if (activeLevel != null)
+        {
             DestroyObject(activeLevel);
+            newLevel = true;
+        }
         if (levelNum < levels.Count)
             activeLevel = GameObject.Instantiate(levels[num]);
 
@@ -25,20 +53,11 @@ public class LevelManager : MonoBehaviour {
         GameManager.instance.damageEffect.color = tempColor;
         player.transform.SetParent(activeLevel.transform);
 
-        var attackers = GameObject.FindObjectsOfType<GameObject>();
-        for (int i = 0; i < attackers.Length; i++)
-        {
-            AttackingUnitI attacker = attackers[i].GetComponent<AttackingUnitI>();
-            if (attacker  == null) continue;
-            for(int j = 0; j < 30; j++)
-            {
-                Missile missile = GameObject.Instantiate(attacker.Missile).GetComponent<Missile>();
-                missile.OnInit();
-                missile.tr.SetParent(activeLevel.transform);
-                InitMissile(attackers[i], missile.GetComponent<Missile>());
-            }
-            
-        }
+        CameraManager.instance.SetTarget(player.transform);
+
+        StartCoroutine(InstantiateMissilesOverTime());
+        if(newLevel)
+            StarManager.instance.RePositionStars();
     }
 
     public void NextLevel()

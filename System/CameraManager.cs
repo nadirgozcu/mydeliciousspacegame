@@ -57,7 +57,6 @@ public class CameraManager : MonoBehaviour
     {
         instance = this;
         cameraTransform = transform;
-        setTarget(PlayerCharacter.instance.tr);
     }
     void Update()
     {
