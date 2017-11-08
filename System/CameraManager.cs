@@ -4,7 +4,6 @@ using System;
 
 public class CameraManager : MonoBehaviour
 {
-
     public static CameraManager instance;
     private Transform cameraTransform;
     private bool inFollow = true;

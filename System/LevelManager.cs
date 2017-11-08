@@ -52,8 +52,6 @@ public class LevelManager : MonoBehaviour {
     public void resetLevel()
     {
         loadLevel(levelNum);
-        
-
     }
 
     public void InitMissile(GameObject owner, Missile missile)
