@@ -72,7 +72,7 @@ public abstract class UnitComponent : MonoBehaviour
     public UnitComponent SetVelocity(Vector2 vel)
     {
         veloList.Clear();
-        addVelocity("fixed", vel, false);
+        AddVelocity("fixed", vel, false);
         return this;
     }
     public UnitComponent RotateTo(Vector2 dir)
@@ -88,14 +88,14 @@ public abstract class UnitComponent : MonoBehaviour
     public UnitComponent MoveTo(Vector2 dir)
     {
         if (!isMoveble) return this;
-        addVelocity("move", dir.normalized * ms, false);
+        AddVelocity("move", dir.normalized * ms, false);
         RotateTo(dir);
      
 
         return this;
 
     }
-    public string addVelocity(string key, Vector2 vel, bool stack)
+    public string AddVelocity(string key, Vector2 vel, bool stack)
     {
         vel.x = vel.x / rb.mass;
         vel.y = vel.y / rb.mass;
@@ -106,7 +106,7 @@ public abstract class UnitComponent : MonoBehaviour
             }
             else
             {
-                key = addVelocity(key + "1", vel, stack);
+                key = AddVelocity(key + "1", vel, stack);
             }
         }
             
